@@ -7,14 +7,20 @@ typedef enum {
 } Screen;
 
 static void AdminUI_displayScreen(AdminUI* this, Screen id) {
+    Event* event;
+    char hasBumpedStr[] = "yes";
+    char noBumpStr[] = "no";
     switch (id) {
         case MAIN_SCREEN:
+            printf("Main screen\n");
             // TODO
         break;
 
         case LOG_SCREEN:
+            printf("Log screen\n");
             for(int i = 0; this->events[i] != NULL; i++) {
-                // TODO: print event info
+                event = this->events[i];
+                printf("Robot speed: %d, luminosity: %f, collision: %s\n", event->speed, event->sensorState.luminosity, event->sensorState.collision == BUMPED ? hasBumpedStr : noBumpStr);
             }
         break;
 
@@ -61,7 +67,7 @@ void AdminUI_start(AdminUI* this) {
     AdminUI_displayScreen(this, MAIN_SCREEN);
 }
 void AdminUI_stop(AdminUI* this) {
-    // TODO
+    AdminUI_quit(this);
 }
 void AdminUI_quit(AdminUI* this) {
     Logger_stopPolling(this->logger);
