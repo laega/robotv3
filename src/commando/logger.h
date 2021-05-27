@@ -10,7 +10,7 @@ typedef struct {
     int eventsCounter;
 } Logger;
 
-extern Logger* Logger_new();
+extern Logger* Logger_new(Robot*);
 
 extern void Logger_free(Logger*);
 

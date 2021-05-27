@@ -6,11 +6,12 @@ static void Logger_appendEvent (Logger* this, void* SensorsState, void* speed) {
     this->events[this->eventsCounter++] = Event_new(SensorsState, speed);
 }
 
-Logger* Logger_new() {
+Logger* Logger_new(Robot* robot) {
     Logger* this = (Logger*) malloc(sizeof(Logger));
 
 	if (this == NULL) PProseError("Cannot initiate pilot");
     this->eventsCounter = 0;
+    this->robot = robot;
 
 	return this;
 }
