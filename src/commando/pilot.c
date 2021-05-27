@@ -58,6 +58,11 @@ static _Bool Pilot_hasBumped(Pilot* this)
 	return Robot_getSensorsState(this->robot).collision;
 }
 
+/**
+ * Fonction Pilot Choice
+ *
+ * @brief adapte le comportement du robot en fonction de la collision
+ */
 static void Pilot_choice(Pilot* this) {
 	if (Pilot_hasBumped(this)) {
 		this->etat = NORMAL_IDLE;
