@@ -16,7 +16,13 @@ int main (int argc, char *argv[])
 	AdminUI* adminUI = AdminUI_new(logger, pilot);
 
 	AdminUI_start(adminUI);
-	// ?
+	AdminUI_goScreenLog(adminUI);
+
+	printf ("Press ENTER to quit.\n");
+	fflush( stdin );
+    fgetc( stdin );
+
+	AdminUI_backMainSreen(adminUI);
 	AdminUI_quit(adminUI);
 
 	AdminUI_free(adminUI);

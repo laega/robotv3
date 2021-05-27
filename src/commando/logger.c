@@ -11,6 +11,8 @@ static void Logger_appendEvent (Logger* this) {
     event->speed = Robot_getRobotSpeed(this->robot);
 
     this->events[this->eventsCounter++] = event;
+
+    Logger_startPolling(this);
 }
 
 Logger* Logger_new(Robot* robot) {
