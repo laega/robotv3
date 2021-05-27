@@ -1,6 +1,8 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
+#include "event.h"
+
 #define MAX_NB_OF_EVENTS 999
 
 typedef struct {

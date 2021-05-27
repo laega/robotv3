@@ -50,7 +50,7 @@
 #define FRONT_BUMPER S3
 #define FLOOR_SENSOR S2
 
-
+typedef int Speed;
 typedef enum {NO_BUMP=0, BUMPED} Collision;
 
 /**
@@ -134,10 +134,10 @@ extern SensorsState Robot_getSensorsState(Robot*);
  *
  * @brief Change la puissance des roues du Robot
  *
- * @param int: puissance envoyée au moteur droit , valeur comprise entre (-100, 100).
- * @param int: puissance envoyée au moteur gauche, valeur comprise entre (-100, 100).
+ * @param Speed: puissance envoyée au moteur droit , valeur comprise entre (-100, 100).
+ * @param Speed: puissance envoyée au moteur gauche, valeur comprise entre (-100, 100).
  */
-extern void Robot_setWheelsVelocity(Robot*, int, int);
+extern void Robot_setWheelsVelocity(Robot*, Speed, Speed);
 
 #endif /* ROBOT_H */
 

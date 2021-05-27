@@ -2,6 +2,8 @@
 #ifndef ADMINUI_H
 #define ADMINUI_H
 
+#include "event.h"
+
 typedef struct {
     int currentEventNumber;
     int previousEventNumber;
