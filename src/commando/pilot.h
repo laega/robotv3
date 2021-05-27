@@ -86,7 +86,7 @@ extern void Pilot_stop(Pilot*);
  *
  * @brief Initialise l'objet Pilot en mémoire
  */
-extern Pilot* Pilot_new();
+extern Pilot* Pilot_new(Logger*, Robot*);
 
 
 /**

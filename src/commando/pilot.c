@@ -51,12 +51,13 @@ static _Bool Pilot_hasBumped(Pilot* this)
  *
  * @brief Initialise l'objet Pilot en mémoire
  */
-Pilot* Pilot_new(){
+Pilot* Pilot_new(Logger* logger, Robot* robot){
 	Pilot* this = (Pilot*) malloc(sizeof(Pilot));
 
 	if (this == NULL) PProseError("Cannot initiate pilot");
 
-	this->robot = Robot_new();
+	this->logger = logger;
+	this->robot = robot;
 	this->watchdog = Watchdog_new(1, 0, (WatchdogCallback) Pilot_choice, this);
 
 	return this;
@@ -68,7 +69,6 @@ Pilot* Pilot_new(){
  * @brief Détruit l'objet Pilot de la mémoire
  */
 void Pilot_free(Pilot* this){
-	Robot_free(this->robot);
 	Watchdog_free(this->watchdog);
 	free(this);
 }
