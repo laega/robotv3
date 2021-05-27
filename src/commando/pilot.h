@@ -68,22 +68,6 @@ typedef struct
 } Pilot;
 
 /**
- * Fonction Start Pilot
- *
- * @brief Démarre le robot et le pilotage
- */
-extern void Pilot_start(Pilot*);
-
-
-/**
- * Fonction Stop Pilot
- *
- * @brief Arrête le Robot et le pilotage
- */
-extern void Pilot_stop(Pilot*);
-
-
-/**
  * Fonction New Pilot
  *
  * @brief Initialise l'objet Pilot en mémoire

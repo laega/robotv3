@@ -81,22 +81,6 @@ typedef struct
 } Robot;
 
 /**
- * Fonction Start Robot
- *
- * @brief Démarre le robot (initialise la communication et ouvre le port)
- */
-extern void Robot_start(Robot*);
-
-
-/**
- * Fonction Stop Robot
- *
- * @brief Arrête le robot (arrête la communication et ferme le port)
- */
-extern void Robot_stop(Robot*);
-
-
-/**
  * Fonction New Robot
  *
  * @brief Initialise l'object Robot en mémoire

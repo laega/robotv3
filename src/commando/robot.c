@@ -3,29 +3,11 @@
 #include "robot.h"
 
 /**
- * Fonction New Robot
- *
- * @brief Initialise l'object Robot en mémoire
- */
-Robot* Robot_new(){
-	return (Robot *) malloc(sizeof(Robot));
-}
-
-/**
- * Fonction Free Robot
- *
- * @brief Détruit l'object Robot de la mémoire
- */
-void Robot_free(Robot* rbt){
-	free(rbt);
-}
-
-/**
  * Fonction Start Robot
  *
  * @brief Démarre le robot (initialise la communication et ouvre le port)
  */
-void Robot_start(Robot* rbt){
+static void Robot_start(Robot* rbt){
 	/* Initialisation des moteurs. */
 	rbt-> mD = Motor_open(MA);
 	if (rbt-> mD == NULL) PProseError("Problème d'ouverture du moteur droit (port MA)");
@@ -42,7 +24,6 @@ void Robot_start(Robot* rbt){
 
 	rbt -> sensorFloor = ContactSensor_open(S2);
 	if (rbt-> sensorFloor == NULL) PProseError("Problème d'ouverture du capteur de sensorFloor (port S2)");
-
 }
 
 /**
@@ -50,7 +31,7 @@ void Robot_start(Robot* rbt){
  *
  * @brief Arrête le robot (arrête la communication et ferme le port)
  */
-void Robot_stop(Robot* rbt){
+static void Robot_stop(Robot* rbt){
 	/* fermeture des ports des moteurs. */
 
 	if (Motor_close(rbt->mD) == -1) PProseError("Problème de fermeture du moteur droit (port MA)");
@@ -63,6 +44,29 @@ void Robot_stop(Robot* rbt){
 	if (ContactSensor_close(rbt -> sensorFront) == -1) PProseError("Problème de fermeture du capteur de sensorFront (port S3)");
 
 	if (ContactSensor_close(rbt -> sensorFloor) == -1) PProseError("Problème de fermeture du capteur de sensorFloor (port S2)");
+}
+
+/**
+ * Fonction New Robot
+ *
+ * @brief Initialise l'object Robot en mémoire
+ */
+Robot* Robot_new(){
+	Robot* this = (Robot *) malloc(sizeof(Robot));
+	if(this == NULL) PProseError("Cannot instantiate Robot");
+
+	Robot_start(this);
+	return this;
+}
+
+/**
+ * Fonction Free Robot
+ *
+ * @brief Détruit l'object Robot de la mémoire
+ */
+void Robot_free(Robot* rbt){
+	Robot_stop(this);
+	free(rbt);
 }
 
 /**

@@ -34,6 +34,21 @@ static void Pilot_sendMvt(Pilot* this)
 }
 
 /**
+ * Fonction Start Pilot
+ *
+ * @brief Démarre le robot et le pilotage
+ */
+static void Pilot_start(Pilot* this){
+	Robot_start(this->robot);
+
+	this->etat = NORMAL_IDLE;
+	this->vel = (VelocityVector) {STOP,0};
+
+	/*Initialisation robot*/
+	Pilot_sendMvt(this);
+}
+
+/**
  * Fonction HasBumped Pilot
  *
  * @brief Met à jour l'état des capteurs et renvoie "true" s'il a rencontré un obstacle
@@ -80,22 +95,6 @@ Pilot* Pilot_new(Logger* logger, Robot* robot){
 void Pilot_free(Pilot* this){
 	Watchdog_free(this->watchdog);
 	free(this);
-}
-
-/**
- * Fonction Start Pilot
- *
- * @brief Démarre le robot et le pilotage
- */
-void Pilot_start(Pilot* this){
-	Robot_start(this->robot);
-
-	this->etat = NORMAL_IDLE;
-	this->vel = (VelocityVector) {STOP,0};
-
-	/*Initialisation robot*/
-	Pilot_sendMvt(this);
-
 }
 
 /**

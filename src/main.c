@@ -15,6 +15,10 @@ int main (int argc, char *argv[])
 	Pilot* pilot = Pilot_new(logger, robot);
 	AdminUI* adminUI = AdminUI_new(logger, pilot);
 
+	AdminUI_start(adminUI);
+	// ?
+	AdminUI_quit(adminUI);
+
 	AdminUI_free(adminUI);
 	Pilot_free(pilot);
 	Logger_free(logger);
