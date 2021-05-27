@@ -15,7 +15,7 @@ typedef struct {
 } AdminUI;
 
 
-extern AdminUI* AdminUI_new(Pilot*, Logger*);
+extern AdminUI* AdminUI_new(Logger*, Pilot*);
 extern void AdminUI_free(AdminUI*);
 extern void AdminUI_start(AdminUI*);
 extern void AdminUI_stop(AdminUI*);

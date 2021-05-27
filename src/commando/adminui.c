@@ -37,14 +37,14 @@ static void AdminUI_logScreen() {
     AdminUI_displayScreen(this, LOG_SCREEN);
 }
 
-AdminUI* AdminUI_new(Pilot* pilot, Logger* logger) {
+AdminUI* AdminUI_new(Logger* logger, Pilot* pilot) {
     AdminUI* this = (AdminUI*) malloc(sizeof(AdminUI));
 	if (this == NULL) PProseError("Cannot initiate AdminUI");
 
     this->previousEventNumber = this->currentEventNumber = 0;
     this->events = NULL;
-    this->pilot = pilot;
     this->logger = logger;
+    this->pilot = pilot;
     this->watchdog = Watchdog_new(1, 0, (WatchdogCallback)AdminUI_logScreen, this);
 
 	return this;
