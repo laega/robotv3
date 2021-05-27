@@ -58,5 +58,16 @@ void Logger_clearEvents(Logger* this) {
 }
 
 void Logger_signalES(Logger* this, _Bool signalVal) {
-    // TODO
+    char state[4];
+    state[0] = 'o';
+    if (signalVal == TRUE) {
+        // on
+        state[1] = 'n';
+        state[2] = 0;
+    } else {
+        // off
+        state[1] = state[2] = 'f';
+    }
+    state[3] = 0;
+    printf("Emergency state: %s\n", state);
 }
