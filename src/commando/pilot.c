@@ -39,8 +39,6 @@ static void Pilot_sendMvt(Pilot* this)
  * @brief Démarre le robot et le pilotage
  */
 static void Pilot_start(Pilot* this){
-	Robot_start(this->robot);
-
 	this->etat = NORMAL_IDLE;
 	this->vel = (VelocityVector) {STOP,0};
 
@@ -83,6 +81,8 @@ Pilot* Pilot_new(Logger* logger, Robot* robot){
 	this->logger = logger;
 	this->robot = robot;
 	this->watchdog = Watchdog_new(1, 0, (WatchdogCallback) Pilot_choice, this);
+
+	Pilot_start(this);
 
 	return this;
 }
