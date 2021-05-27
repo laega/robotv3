@@ -30,6 +30,7 @@ static void AdminUI_updateEvents(AdminUI* this) {
 }
 
 static void AdminUI_logScreen() {
+    Watchdog_start(this->watchdog);
     AdminUI_updateEvents(this);
     AdminUI_displayScreen(this, LOG_SCREEN);
 }
@@ -48,17 +49,21 @@ AdminUI* AdminUI_new(Pilot* pilot, Logger* logger) {
 }
 void AdminUI_free(AdminUI*) {
     if (this->events != NULL) free(this->events);
+    Watchdog_free(this->watchdog);
     free(this);
 }
 
 void AdminUI_start(AdminUI* this) {
-    // TODO
+    this->previousEventNumber = this->currentEventNumber = 0;
+
+    AdminUI_displayScreen(MAIN_SCREEN);
 }
 void AdminUI_stop(AdminUI* this) {
     // TODO
 }
 void AdminUI_quit(AdminUI* this) {
     Logger_stopPolling(this->logger);
+    Watchdog_cancel(this->watchdog);
 }
 void AdminUI_toggleEmergencyStop(AdminUI*) {
     Pilot_toggleES(this->pilot);
@@ -72,10 +77,9 @@ void AdminUI_clearLog(AdminUI* this) {
     this->previousEventNumber = this->currentEventNumber = 0;
 }
 void AdminUI_goScreenLog(AdminUI* this) {
-    // TODO
+    AdminUI_logScreen(this);
 }
 void AdminUI_backMainSreen(AdminUI* this) {
-    // TODO
+    AdminUI_displayScreen(MAIN_SCREEN);
 }
 
-#endif /* ADMINUI_H */
