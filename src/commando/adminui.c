@@ -13,7 +13,9 @@ static void AdminUI_displayScreen(AdminUI* this, Screen id) {
         break;
 
         case LOG_SCREEN:
-            // TODO
+            for(int i = 0; this->events[i] != NULL; i++) {
+                // TODO: print event info
+            }
         break;
 
         default:
