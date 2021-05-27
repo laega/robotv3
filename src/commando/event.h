@@ -8,4 +8,4 @@ typedef struct {
     Speed speed;
 } Event;
 
-#endif EVENT_H
+#endif /* EVENT_H */
