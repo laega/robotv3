@@ -47,7 +47,7 @@ typedef struct Watchdog_t Watchdog;
  *
  * @param arg the arg passed to the constuctor
  */
-typedef void (*WatchdogCallback)(Pilot *arg);
+typedef void (*WatchdogCallback)(void *arg);
 
 /**
  * Watchdog's constructor.
@@ -55,7 +55,7 @@ typedef void (*WatchdogCallback)(Pilot *arg);
  * @param delay expressed in microseconds
  * @param callback function to be called at expiration
  */
-extern Watchdog *Watchdog_new(uint32_t delay, WatchdogCallback callback, Pilot* arg);
+extern Watchdog *Watchdog_new(uint32_t, long, WatchdogCallback, void*);
 
 /**
  * Arms the watchdog.
@@ -76,6 +76,6 @@ extern void Watchdog_cancel(Watchdog *this);
  *
  * @param this watchdog's instance
  */
-extern void Watchdog_destroy(Watchdog *this);
+extern void Watchdog_free(Watchdog *this);
 
 #endif /* WATCHDOG_H_ */

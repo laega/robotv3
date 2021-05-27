@@ -14,7 +14,7 @@
  */
 static void Pilot_sendMvt(Pilot* this)
 {
-	switch (vel.dir)
+	switch (this->vel.dir)
 	{
 		case (LEFT) :
 			Robot_setWheelsVelocity(this->robot, 0, this->vel.power);
@@ -45,6 +45,15 @@ static _Bool Pilot_hasBumped(Pilot* this)
 	return Robot_getSensorsState(this->robot).collision;
 }
 
+static void Pilot_choice(Pilot* this) {
+	if (Pilot_hasBumped(this)) {
+		this->etat = NORMAL_IDLE;
+		this->vel.dir = STOP;
+		Pilot_sendMvt(this);
+	} else {
+		Watchdog_start(this->watchdog);
+	}
+}
 
 /**
  * Fonction New Pilot
@@ -89,18 +98,6 @@ void Pilot_start(Pilot* this){
 
 }
 
-static void Pilot_choice(Pilot* this) {
-	if (Pilot_hasBumped(this)) {
-		this->etat = NORMAL_IDLE;
-		this->vel.dir = STOP;
-		Pilot_sendMvt(this);
-	} else {
-		Watchdog_start(this->watchdog);
-	}
-}
-
-
-
 /**
  * Mutateur setVelocity Pilot
  *
@@ -143,7 +140,7 @@ void Pilot_toggleES(Pilot* this) {
 
 		case EMERGENCY:
 			this->etat = NORMAL_IDLE;
-			Logger_signalES(this->logger, false);
+			Logger_signalES(this->logger, FALSE);
 		break;
 
 		default: PProseError("Illegal invocation");

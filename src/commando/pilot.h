@@ -36,8 +36,10 @@
 #ifndef PILOT_H
 #define PILOT_H
 
-#include "robot.h"
 #include "commun.h"
+#include "logger.h"
+#include "robot.h"
+#include "watchdog.h"
 
 /**
  * Structure du Pilotage
@@ -47,7 +49,7 @@
 typedef enum {
     NORMAL_IDLE = 0,
     NORMAL_RUNNING,
-    EMMERGENCY,
+    EMERGENCY,
     ETAT_LENGTH
 } Etat;
 

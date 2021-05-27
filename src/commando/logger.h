@@ -2,11 +2,12 @@
 #define LOGGER_H
 
 #include "event.h"
+#include "watchdog.h"
 
 #define MAX_NB_OF_EVENTS 999
 
 typedef struct {
-    Event*[MAX_NB_OF_EVENTS] events;
+    Event* events[MAX_NB_OF_EVENTS];
     int eventsCounter;
     Robot* robot;
     Watchdog* watchdog;

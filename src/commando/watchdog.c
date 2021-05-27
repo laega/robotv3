@@ -28,7 +28,7 @@
  * THE SOFTWARE.
  */
 #include "watchdog.h"
-#include "pmu_tools.h"
+#include "prose.h"
 #include <malloc.h>
 #include <signal.h>
 #include <time.h>
@@ -98,7 +98,7 @@ void Watchdog_cancel (Watchdog *this)
 	if(error_code == -1) PProseError("Unexpected error code");
 }
 
-void Watchdog_destroy (Watchdog *this)
+void Watchdog_free (Watchdog *this)
 {
 	int error_code;
 

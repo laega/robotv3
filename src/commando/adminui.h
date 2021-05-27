@@ -3,6 +3,9 @@
 #define ADMINUI_H
 
 #include "event.h"
+#include "logger.h"
+#include "pilot.h"
+#include "watchdog.h"
 
 typedef struct {
     int currentEventNumber;
