@@ -65,7 +65,7 @@ Robot* Robot_new(){
  * @brief Détruit l'object Robot de la mémoire
  */
 void Robot_free(Robot* rbt){
-	Robot_stop(this);
+	Robot_stop(rbt);
 	free(rbt);
 }
 
