@@ -4,7 +4,7 @@
 #include "robot.h"
 
 typedef struct {
-    SensorsState* sensorState;
+    SensorsState sensorState;
     Speed speed;
 } Event;
 

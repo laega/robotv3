@@ -118,7 +118,7 @@ extern void Robot_free(Robot*);
  *
  * @return vitesse du robot (valeur entre 0 et 100)
  */
-extern int Robot_getRobotSpeed(Robot*);
+extern Speed Robot_getRobotSpeed(Robot*);
 
 /**
  * Accesseur getSensorState Robot

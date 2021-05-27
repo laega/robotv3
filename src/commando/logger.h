@@ -8,6 +8,8 @@
 typedef struct {
     Event*[MAX_NB_OF_EVENTS] events;
     int eventsCounter;
+    Robot* robot;
+    Watchdog* watchdog;
 } Logger;
 
 extern Logger* Logger_new(Robot*);

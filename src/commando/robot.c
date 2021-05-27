@@ -72,7 +72,7 @@ void Robot_stop(Robot* rbt){
  *
  * @return vitesse du robot (valeur entre 0 et 100)
  */
-int Robot_getRobotSpeed(Robot* rbt){
+Speed Robot_getRobotSpeed(Robot* rbt){
 	/*moteur droit*/
 	Cmd CmdD = Motor_getCmd(rbt -> mD);
 	if (CmdD == E_GCMD){
@@ -111,10 +111,10 @@ SensorsState Robot_getSensorsState(Robot* rbt){
  *
  * @brief Change la puissance des roues du Robot
  *
- * @param int: puissance envoyée au moteur droit , valeur comprise entre (-100, 100).
- * @param int: puissance envoyée au moteur gauche, valeur comprise entre (-100, 100).
+ * @param Speed: puissance envoyée au moteur droit , valeur comprise entre (-100, 100).
+ * @param Speed: puissance envoyée au moteur gauche, valeur comprise entre (-100, 100).
  */
-void Robot_setWheelsVelocity(Robot* rbt, int mr, int ml){
+void Robot_setWheelsVelocity(Robot* rbt, Speed mr, Speed ml){
 	if (Motor_setCmd(rbt -> mD, mr)==-1)
 		PProseError("Problème lors de la transmission de la commande au mD");
 	if (Motor_setCmd(rbt -> mG, ml)==-1)
