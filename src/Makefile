@@ -28,7 +28,7 @@ DEP = $(MAIN:.c=.d)
 EXEC = ../$(PROG)
 
 # Inclusion depuis le niveau du package Robot.
-CCFLAGS += -I. -I../.. -I../../.. -I./$(PACKAGES) 
+CCFLAGS += -I. -I.. -I./$(PACKAGES) 
 
 #
 # Règles du Makefile.
