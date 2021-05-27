@@ -32,8 +32,10 @@ Event** Logger_getEvents(Logger* this, int from, int to) {
         PProseError("Illegal argument value");
 
     size_t size = sizeof(Event*) * (to - from);
-    Event** returnPnt = (Event**) malloc(size);
+    Event** returnPnt = (Event**) malloc(size + 1);
+    if (returnPnt == NULL) PProseError("Cannot allocate memory");
     memcpy(returnPnt, &this->events[from], size);
+    returnPnt[size] = NULL;
     return returnPnt;
 }
 int Logger_getEventsCount(Logger* this) {

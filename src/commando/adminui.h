@@ -5,7 +5,7 @@
 typedef struct {
     int currentEventNumber;
     int previousEventNumber;
-    Event*[] events;
+    Event** events;
 
     Pilot* pilot;
     Logger* logger;

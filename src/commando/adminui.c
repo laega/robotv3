@@ -7,11 +7,25 @@ typedef enum {
 } Screen;
 
 static void AdminUI_displayScreen(AdminUI* this, Screen id) {
-    // TODO
+    switch (id) {
+        case MAIN_SCREEN:
+            // TODO
+        break;
+
+        case LOG_SCREEN:
+            // TODO
+        break;
+
+        default:
+        PProseError("Illegal invocation");
+    }
 }
 static void AdminUI_updateEvents(AdminUI* this) {
     this->currentEventNumber = Logger_getEventsCount(this->logger);
+
+    if (this->events != NULL) free(this->events);
     this->events = Logger_getEvents(this->logger, this->previousEventNumber,this->currentEventNumber);
+
     this->previousEventNumber = this->currentEventNumber;
 }
 
@@ -20,29 +34,48 @@ static void AdminUI_logScreen() {
     AdminUI_displayScreen(this, LOG_SCREEN);
 }
 
-extern AdminUI* AdminUI_new(Pilot* pilot, Logger* logger) {
+AdminUI* AdminUI_new(Pilot* pilot, Logger* logger) {
     AdminUI* this = (AdminUI*) malloc(sizeof(AdminUI));
 	if (this == NULL) PProseError("Cannot initiate AdminUI");
 
     this->previousEventNumber = this->currentEventNumber = 0;
+    this->events = NULL;
     this->pilot = pilot;
     this->logger = logger;
     this->watchdog = Watchdog_new(1, 0, (WatchdogCallback)AdminUI_logScreen, this);
 
 	return this;
 }
-extern void AdminUI_free(AdminUI*) {
+void AdminUI_free(AdminUI*) {
+    if (this->events != NULL) free(this->events);
     free(this);
 }
 
-extern void AdminUI_start(AdminUI*);
-extern void AdminUI_stop(AdminUI*);
-extern void AdminUI_quit(AdminUI*);
-extern void AdminUI_toggleEmergencyStop(AdminUI*) {
+void AdminUI_start(AdminUI* this) {
+    // TODO
+}
+void AdminUI_stop(AdminUI* this) {
+    // TODO
+}
+void AdminUI_quit(AdminUI* this) {
+    Logger_stopPolling(this->logger);
+}
+void AdminUI_toggleEmergencyStop(AdminUI*) {
     Pilot_toggleES(this->pilot);
 }
-extern void AdminUI_clearLog(AdminUI*);
-extern void AdminUI_goScreenLog(AdminUI*);
-extern void AdminUI_backMainSreen(AdminUI*);
+void AdminUI_clearLog(AdminUI* this) {
+    Logger_clearEvents(this->logger);
+    if (this->events != NULL) {
+        free(this->events);
+        this->events = NULL;
+    }
+    this->previousEventNumber = this->currentEventNumber = 0;
+}
+void AdminUI_goScreenLog(AdminUI* this) {
+    // TODO
+}
+void AdminUI_backMainSreen(AdminUI* this) {
+    // TODO
+}
 
 #endif /* ADMINUI_H */
